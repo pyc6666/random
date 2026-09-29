@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老鼠滾輪抽籤機</title>
+  <meta name="description" content="貼上學生名單，讓滾輪上的小老鼠幫你抽出上台的同學。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐭</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1><span class="logo">🐭</span> 老鼠滾輪抽籤機</h1>
+    <div class="stats" id="stats"></div>
+    <div class="tools">
+      <button id="btnList" class="btn" type="button">📋 名單</button>
+      <button id="btnSound" class="btn icon" type="button" title="音效開關">🔊</button>
+      <button id="btnFull" class="btn icon" type="button" title="全螢幕">⛶</button>
+    </div>
+  </header>
+
+  <main id="stage" class="stage"></main>
+
+  <footer class="bottombar">
+    <div class="history">
+      <span class="history-label">已上台</span>
+      <ol id="historyList"></ol>
+      <button id="btnReset" class="btn small ghost" type="button">↺ 重置</button>
+    </div>
+    <button id="btnDraw" class="draw-btn" type="button">🧀 抽一位！</button>
+  </footer>
+
+  <div id="backdrop" class="backdrop"></div>
+  <canvas id="confetti" class="confetti"></canvas>
+  <div id="result" class="result" hidden>
+    <div class="result-sub" id="resultSub"></div>
+    <div class="result-name" id="resultName" aria-live="assertive"></div>
+    <div class="result-actions">
+      <button id="btnAgain" class="draw-btn small" type="button">🧀 再抽一位</button>
+      <button id="btnClose" class="btn" type="button">回到滾輪</button>
+    </div>
+  </div>
+
+  <dialog id="listDialog" class="dialog">
+    <form id="listForm" method="dialog">
+      <h2>📋 學生名單</h2>
+      <p class="hint">直接從 Excel、Google 試算表或文字檔貼上。一行一位，也可以用逗號、頓號分隔。</p>
+      <textarea id="namesInput" rows="12" spellcheck="false"
+        placeholder="例如：&#10;01 王小明&#10;02 李小華&#10;03 陳大文"></textarea>
+      <div class="dialog-row">
+        <span id="nameCount">共 0 位</span>
+        <label class="check"><input type="checkbox" id="noRepeat"> 抽過的不再抽</label>
+      </div>
+      <div class="dialog-actions">
+        <button id="btnCancel" class="btn ghost" type="button">取消</button>
+        <button id="btnApply" class="draw-btn small" type="submit">套用名單</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
